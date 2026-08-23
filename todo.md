@@ -17,3 +17,7 @@
 - [x] Define and enforce guest export availability and limits through deployment-time environment configuration.
 - [x] Use environment-backed guest clip/export limits consistently in manual draft creation and render-queue eligibility.
 - [x] Create the final verified project checkpoint after all outstanding implementation gaps are closed.
+- [x] Re-run production checks before external publication and confirm the Vercel frontend deployment configuration.
+- [ ] Create a private GitHub repository and push the verified ClipForge AI source.
+- [ ] Deploy the Vercel frontend and capture its production URL.
+- [ ] Update the GitHub repository description with the Vercel URL and clear Render worker setup note.
