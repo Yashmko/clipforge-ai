@@ -1,0 +1,77 @@
+services:
+  - type: web
+    name: clipforge-api
+    runtime: docker
+    dockerfilePath: ./render-api/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    plan: starter
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: CLIPFORGE_WEB_ORIGIN
+        sync: false
+      - key: S3_BUCKET
+        sync: false
+      - key: S3_REGION
+        sync: false
+      - key: S3_ACCESS_KEY_ID
+        sync: false
+      - key: S3_SECRET_ACCESS_KEY
+        sync: false
+      - key: S3_ENDPOINT
+        sync: false
+      - key: S3_PUBLIC_BASE_URL
+        sync: false
+      - key: CLIPFORGE_MAX_UPLOAD_MB
+        value: 250
+      - key: CLIPFORGE_MAX_SOURCE_MINUTES
+        value: 60
+      - key: CLIPFORGE_MAX_CLIPS_PER_JOB
+        value: 3
+      - key: CLIPFORGE_MAX_EXPORTS_PER_JOB
+        value: 3
+      - key: CLIPFORGE_EXPORTS_ENABLED
+        value: true
+      - key: CLIPFORGE_RETENTION_HOURS
+        value: 24
+
+  - type: worker
+    name: clipforge-worker
+    runtime: docker
+    dockerfilePath: ./render-worker/Dockerfile
+    dockerContext: .
+    plan: starter
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: S3_BUCKET
+        sync: false
+      - key: S3_REGION
+        sync: false
+      - key: S3_ACCESS_KEY_ID
+        sync: false
+      - key: S3_SECRET_ACCESS_KEY
+        sync: false
+      - key: S3_ENDPOINT
+        sync: false
+      - key: S3_PUBLIC_BASE_URL
+        sync: false
+      - key: CLIPFORGE_GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: CLIPFORGE_MAX_UPLOAD_MB
+        value: 250
+      - key: CLIPFORGE_MAX_SOURCE_MINUTES
+        value: 60
+      - key: CLIPFORGE_MAX_CLIPS_PER_JOB
+        value: 3
+      - key: CLIPFORGE_MAX_EXPORTS_PER_JOB
+        value: 3
+      - key: CLIPFORGE_EXPORTS_ENABLED
+        value: true
+      - key: CLIPFORGE_RETENTION_HOURS
+        value: 24
